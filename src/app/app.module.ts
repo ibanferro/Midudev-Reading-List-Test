@@ -5,16 +5,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { BookComponent } from './components/book/book.component';
+import { AvailableBooksComponent } from './components/available-books/available-books.component';
+import { ReadingListComponent } from './components/reading-list/reading-list.component';
+import { HeaderComponent } from './components/header/header.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FilteringFormularyComponent } from './components/filtering-formulary/filtering-formulary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    BookComponent
+    BookComponent,
+    AvailableBooksComponent,
+    ReadingListComponent,
+    HeaderComponent,
+    BookCardComponent,
+    FilteringFormularyComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

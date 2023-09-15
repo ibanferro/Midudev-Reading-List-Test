@@ -1,0 +1,5 @@
+
+<div class="w-full bg-black flex items-center font-bold text-xl text-left text-white">
+  <ng-container *ngIf="availableBooksQuantity === 0">No books available</ng-container>
+  <ng-container *ngIf="availableBooksQuantity > 0">{{availableBooksQuantity }} available books</ng-container>
+</div>
