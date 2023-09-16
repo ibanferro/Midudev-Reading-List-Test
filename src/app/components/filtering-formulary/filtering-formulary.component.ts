@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { Book } from 'src/app/interfaces/book';
+import { Subscription } from 'rxjs';
 
 export interface FilteringData {
   pages: number;
@@ -15,7 +16,7 @@ export interface FilteringData {
 })
 
 
-export class FilteringFormularyComponent implements OnInit {
+export class FilteringFormularyComponent implements OnInit, OnDestroy {
 
   @Input() bookList: Book[] = [];
 
@@ -24,6 +25,8 @@ export class FilteringFormularyComponent implements OnInit {
   maxPages: number = 0;
   genreOptionList: string[] = ['All'];
 
+  filteringFormularyChangeListeningSubscription: Subscription;
+
   @Output() filteringDataEE: EventEmitter<FilteringData> = new EventEmitter<FilteringData>();
 
   constructor() {
@@ -31,6 +34,19 @@ export class FilteringFormularyComponent implements OnInit {
       pages: new FormControl({}),
       genre: new FormControl({}),
     });
+
+    this.filteringFormularyChangeListeningSubscription = this.formGroup.valueChanges.subscribe(
+      (filteringFormularyData: FilteringData) => {
+        console.log('**************');
+        console.log('filteringFormularyData: ', filteringFormularyData);
+        console.log('form pages: ', this.formGroup.value.pages);
+        console.log('form genre: ', this.formGroup.value.genre);
+        console.log('**************');
+
+        this.onSubmitFilteringFormulary();
+      }
+    );
+
   }
 
   ngOnInit(): void {
@@ -39,6 +55,11 @@ export class FilteringFormularyComponent implements OnInit {
   ngOnChanges(): void {
     this.maxPages = this.getMaxPages();
     this.genreOptionList = this.getGenreOptionList();
+  }
+
+  ngOnDestroy(): void {
+    if( this.filteringFormularyChangeListeningSubscription)
+    {this.filteringFormularyChangeListeningSubscription.unsubscribe();}
   }
 
   getMaxPages(): number {
