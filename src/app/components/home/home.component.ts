@@ -12,6 +12,9 @@ export class HomeComponent implements OnInit {
 
   bookList: Book[] = [];
   availableBookList: Book[] = [];
+  readingListBooks: Book[] = [];
+
+
 
   constructor(
     private bookService: BookService,
@@ -27,6 +30,11 @@ export class HomeComponent implements OnInit {
       {next: (response) => {
         this.bookList = response;
         this.availableBookList = response;
+
+        const probability: number = 0.3;
+
+        this.readingListBooks = this.bookList.filter((_) => Math.random() > probability);
+        //this.readingListBooks = [];
       },
       error: (error) => {
         console.error(error);
@@ -39,6 +47,11 @@ export class HomeComponent implements OnInit {
     this.availableBookList = this.bookList.filter(({book}) =>
       (filteringData.genre === 'All')? book.pages <= filteringData.pages : book.pages <= filteringData.pages && book.genre === filteringData.genre
     );
+  }
+
+  removeBookFromReadingList(book: Book)
+  {
+    this.readingListBooks = this.readingListBooks.filter((readingListBook) => readingListBook.book.title !== book.book.title);
   }
 
 }

@@ -1,1 +1,5 @@
-<p>book-card works!</p>
+<div class="img-wrapper">
+  <button class="close-button flex justify-center items-center text-center text-black" (click)="removeFromAvailableBooks()">x</button>
+  <img title="Book Image" *ngIf="availableBook != null" [src]="availableBook.book.cover"  [alt]="availableBook.book.title">
+</div>
+

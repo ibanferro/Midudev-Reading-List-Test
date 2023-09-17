@@ -1,3 +1,8 @@
 <app-header [availableBooksQuantity]="availableBookList.length" ></app-header>
 <app-filtering-formulary (filteringDataEE)="onFilteringFormularyDataChange($event)" [bookList]="bookList" ></app-filtering-formulary>
-<app-available-books [availableBooksList]="availableBookList" ></app-available-books>
+
+<div class="books-container w-full flex flex-row">
+  <app-available-books [style.width]="readingListBooks.length !== 0? '70%':'100%'" [availableBooksList]="availableBookList" ></app-available-books>
+  <app-reading-list *ngIf="readingListBooks.length !== 0" [style.width]="readingListBooks.length !== 0? '30%':'0%'"  [readingBookList]="readingListBooks" (removeFromReadingListEE)="removeBookFromReadingList($event)"></app-reading-list>
+</div>
+

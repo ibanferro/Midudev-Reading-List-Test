@@ -1,1 +1,4 @@
-<p>reading-list works!</p>
+
+<div class="w-full bg-slate-600 grid grid-rows-4 grid-cols-2 grid-flow-row">
+  <app-book-card *ngFor="let readingBook of readingBookList" [availableBook]="readingBook" (removeFromAvailableBooksEE)="removeFromReadingList($event)"></app-book-card>
+</div>
