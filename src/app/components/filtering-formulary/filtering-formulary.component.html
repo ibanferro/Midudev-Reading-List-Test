@@ -1,6 +1,9 @@
-<form class="w-full flex flex-row justify-left items-center gap-4 bg-black text-white" [formGroup]="formGroup" (ngSubmit)="onSubmitFilteringFormulary()">
-  Page Filter: <input type="range" title="rangeInput" formControlName="pages" [max]="maxPages" />{{maxPages}}
-  Genre Filter: <select class="text-black" title="selectElement" formControlName="genre">
+<form class="w-full flex flex-row justify-left items-center gap-4 bg-black text-white" [formGroup]="formGroup">
+  <label for="rangeInput">Page Filter</label>
+  <input type="range" id="rangeInput" title="rangeInput" formControlName="pages" [max]="maxPages" [value]="maxPages" />{{maxPages}}
+  <label for="selectElement">Genre Filter</label>
+  <select class="text-black" id="selectElement" title="selectElement" formControlName="genre">
+    <option value="All">All</option>
     <option *ngFor="let option of genreOptionList" [value]="option">{{option}}</option>
   </select>
 </form>

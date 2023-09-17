@@ -23,7 +23,7 @@ export class FilteringFormularyComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
 
   maxPages: number = 0;
-  genreOptionList: string[] = ['All'];
+  genreOptionList: string[] = [];
 
   filteringFormularyChangeListeningSubscription: Subscription;
 
@@ -32,19 +32,12 @@ export class FilteringFormularyComponent implements OnInit, OnDestroy {
   constructor() {
     this.formGroup = new FormGroup({
       pages: new FormControl({}),
-      genre: new FormControl({}),
+      genre: new FormControl('All',{}),
     });
 
     this.filteringFormularyChangeListeningSubscription = this.formGroup.valueChanges.subscribe(
       (filteringFormularyData: FilteringData) => {
-        console.log('**************');
-        console.log('filteringFormularyData: ', filteringFormularyData);
-        console.log('form pages: ', this.formGroup.value.pages);
-        console.log('form genre: ', this.formGroup.value.genre);
-        console.log('**************');
-
-        this.onSubmitFilteringFormulary();
-      }
+        this.filteringDataEE.emit(filteringFormularyData);      }
     );
 
   }
@@ -73,26 +66,13 @@ export class FilteringFormularyComponent implements OnInit, OnDestroy {
   }
 
   getGenreOptionList(): string[] {
-    let genreOptionList: string[] = ['All'];
+    let genreOptionList: string[] = [];
     this.bookList.forEach((book: Book) => {
       if (!genreOptionList.includes(book.book.genre)) {
         genreOptionList.push(book.book.genre);
       }
     });
     return genreOptionList;
-  }
-
-  onSubmitFilteringFormulary(): void {
-    console.log('**************');
-    console.log('Filtering Formulary');
-    console.log('Pages: ', this.formGroup.value.pages);
-    console.log('Genre: ', this.formGroup.value.genre);
-    console.log('**************');
-    const filteringData: FilteringData = {
-      pages: this.formGroup.value.pages,
-      genre: this.formGroup.value.genre,
-    };
-    this.filteringDataEE.emit(filteringData);
   }
 
 }
