@@ -1,2 +1,2 @@
 
-<img title="Book Image" *ngIf="book != null" [src]="book.book.cover"  [alt]="book.book.title">
+<img title="Book Image" *ngIf="book != null" [src]="book.book.cover" [alt]="book.book.title" (dragStart)="onDragStart($event)">

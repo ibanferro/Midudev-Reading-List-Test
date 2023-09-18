@@ -13,10 +13,13 @@ export class BookComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('**************');
-    console.log('Book', this.book?.book.cover);
-    console.log('Book Cover: ', this.book?.book.cover);
-    console.log('**************');
+  }
+
+  onDragStart($event: Event)
+  {
+    console.log('Drag Start', $event);
+
+    if(this.book === null) return;
 
   }
 

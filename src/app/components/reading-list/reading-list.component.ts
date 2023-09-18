@@ -11,6 +11,7 @@ export class ReadingListComponent implements OnInit {
 
   @Input() readingBookList: Book[] = [];
   @Output() removeFromReadingListEE: EventEmitter<Book> = new EventEmitter<Book>();
+  @Output() newBookDraggedEE: EventEmitter<Book> = new EventEmitter<Book>();
 
   constructor() { }
 
@@ -20,6 +21,12 @@ export class ReadingListComponent implements OnInit {
   removeFromReadingList(book: Book)
   {
     this.removeFromReadingListEE.emit(book);
+  }
+
+  onDrop(event: any)
+  {
+    console.log('Drag DROP', event);
+    this.newBookDraggedEE.emit(event);
   }
 
 }

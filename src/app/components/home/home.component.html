@@ -2,7 +2,7 @@
 <app-filtering-formulary (filteringDataEE)="onFilteringFormularyDataChange($event)" [bookList]="bookList" ></app-filtering-formulary>
 
 <div class="books-container w-full flex flex-row">
-  <app-available-books [style.width]="readingListBooks.length !== 0? '70%':'100%'" [availableBooksList]="availableBookList" ></app-available-books>
-  <app-reading-list *ngIf="readingListBooks.length !== 0" [style.width]="readingListBooks.length !== 0? '30%':'0%'"  [readingBookList]="readingListBooks" (removeFromReadingListEE)="removeBookFromReadingList($event)"></app-reading-list>
+  <app-available-books cdkDropList #ln1="cdkDropList" [cdkDropListData]="availableBookList" [cdkDropListConnectedTo]="[ln2]" [style.width]="readingListBooks.length !== 0? '70%':'100%'" [availableBooksList]="availableBookList" (dragstart)="onDragStart()" ></app-available-books>
+  <app-reading-list cdkDropList #ln2="cdkDropList" [cdkDropListData]="readingListBooks" [cdkDropListConnectedTo]="[ln1]" (cdkDropListDropped)="elementDropped($event)" [style.width]="readingListBooks.length !== 0? '30%':'0%'"  [readingBookList]="readingListBooks" (removeFromReadingListEE)="removeBookFromReadingList($event)" ></app-reading-list>
 </div>
 
